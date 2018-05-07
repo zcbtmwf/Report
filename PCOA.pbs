@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# Summerise taxa summary
+make_2d_plots.py -i weighted_unifrac_pc.txt -o ./pcoa  -m mapping_file.tsv -b 'SampleDepth'
+# deactivating environment
+source deactivate

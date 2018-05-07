@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#Load modules
+module load eb
+module load Miniconda2
+# loading virtualenv
+source activate qiime1
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+# Summerise taxa summary
+plot_taxa_summary.py -i otu_table_L3.txt -l phylum -c pie,bar,area -o phylum_charts/ -n 10
+# deactivating environment
+source deactivate
